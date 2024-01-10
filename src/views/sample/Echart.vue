@@ -210,44 +210,87 @@ const lineOptions2 = ref({
    ],
 })
 
-let base = +new Date(1988, 9, 3)
-let oneDay = 24 * 3600 * 1000
-let data = [[base, Math.random() * 300]]
-for (let i = 1; i < 20000; i++) {
-   let now = new Date((base += oneDay))
-   data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])])
-}
+// let base = +new Date(1988, 9, 3)
+// let oneDay = 24 * 3600 * 1000
+// let data = [[base, Math.random() * 300]]
+// for (let i = 1; i < 20000; i++) {
+//    let now = new Date((base += oneDay))
+//    data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])])
+// }
 const lineOptions3 = {
    xAxis: {
-      type: 'time',
+      type: 'category',
       boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
    },
    yAxis: {
       type: 'value',
-      boundaryGap: [0, '100%'],
+      boundaryGap: [0, '30%'],
+   },
+   visualMap: {
+      show: false,
+      pieces: [
+         {
+            gt: 60,
+            color: 'green', // Blue color for the entire range
+         },
+         {
+            lt: 30,
+            color: 'white',
+         },
+      ],
    },
    series: [
       {
-         name: 'Fake Data',
          type: 'line',
-         smooth: true,
+         smooth: 0.6,
          symbol: 'none',
-         itemStyle: {
-            color: 'rgb(250, 200, 88)',
+         lineStyle: {
+            color: 'blue', // Blue for the entire line graph
+            width: 2,
+         },
+         markArea: {
+            silent: true,
+            data: [
+               [
+                  { yAxis: 0 },
+                  {
+                     yAxis: 40,
+                     itemStyle: {
+                        color: 'red', // 0 ~ 40 빨간색 배경
+                     },
+                  },
+               ],
+               [{ yAxis: 30 }, { yAxis: 60, itemStyle: { color: 'grey' } }],
+               [
+                  { yAxis: 60 },
+                  {
+                     yAxis: '', // 수치를 주지않아야 그래프안쪽만 체크
+                     itemStyle: {
+                        color: 'green', // 70 이상 초록색 배경
+                     },
+                  },
+               ],
+            ],
+         },
+         markLine: {
+            symbol: ['none', 'none'],
+            label: { show: false },
+            data: [{ xAxis: 'Tue' }, { xAxis: 'Thu' }, { xAxis: 'Sat' }],
          },
          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-               {
-                  offset: 0,
-                  color: 'rgb(233, 233, 11)',
-               },
-               {
-                  offset: 1,
-                  color: 'rgb(247, 247, 233)',
-               },
-            ]),
+            //color: 'rgba(255, 255, 255)', // Set the default area color to blue
+            opacity: 1,
          },
-         data: data,
+         data: [
+            ['Mon', 20],
+            ['Tue', 0],
+            ['Wed', 20],
+            ['Thu', 120],
+            ['Fri', 40],
+            ['Sat', 10],
+            ['Sun', 100],
+         ],
       },
    ],
 }
