@@ -42,6 +42,12 @@ const managerRoutes = {
          meta: getMeta('Form Test'),
       },
       {
+         path: defaultPath + '/form-component',
+         name: 'FormComponent',
+         component: () => import('@/views/sample/FormComponent.vue'),
+         meta: getMeta('Form Component'),
+      },
+      {
          path: defaultPath + '/date',
          name: 'Date',
          component: () => import('@/views/sample/Date.vue'),

@@ -4,38 +4,77 @@ import { getCurrentInstance } from 'vue'
 import _orderBy from 'lodash/orderBy'
 import _mapValues from 'lodash/mapValues'
 import { constant } from './constant'
+import { LocalStorage } from 'quasar'
+
+import ko_code from '../i18n/codes/ko-code.json'
+import en_code from '../i18n/codes/en-code.json'
 
 const { pad } = format
 
 export const util = {
+   /** 공통 코드 셋팅 */
+   setCommonCodes() {
+      /*
+      let codeList = LocalStorage.getItem('code-list')
+      let params =
+         !codeList || codeList.length === 0
+            ? {}
+            : {
+                 headers: {
+                    'If-Modified-Since': LocalStorage.getItem('code-last-modified'),
+                 },
+              }
+      return new Promise((resolve, reject) => {
+         axios
+            .get('/adm/common/code/v1/downloadAllCodes.do', params)
+            .then((res) => {
+               if (res.status === 200) {
+                  codeList = res.data
+                  LocalStorage.set('code-list', codeList)
+                  LocalStorage.set('code-last-modified', res.headers['last-modified'])
+                  resolve(codeList)
+               }
+            })
+            .catch((error) => {
+               resolve(codeList)
+            })
+      }) */
+
+      return new Promise((resolve, reject) => {
+         LocalStorage.set('code-list', ko_code)
+         resolve(ko_code)
+      })
+   },
+
    /** 공통 코드 조회 */
    getCodes(group, reference, proxy2) {
-      // const proxy = getCurrentInstance() ? getCurrentInstance().proxy : proxy2
-      // let codes = proxy.$codes[group]
+      const proxy = getCurrentInstance() ? getCurrentInstance().proxy : proxy2
+      let codes = proxy.$codes[group]
 
-      // // 참조 코드
-      // if (reference) {
-      //    codes = codes.filter((code) => code.rfrncCol1Cn === reference)
-      // }
+      // 참조 코드
+      if (reference) {
+         codes = codes.filter((code) => code.rfrncCol1Cn === reference)
+      }
 
-      // if (codes && codes.length > 0) {
-      //    // useYn == 'Y', sortOrd 로 정렬
-      //    return _orderBy(
-      //       codes.filter((code) => code.useYn === 'Y' && code.pstgYn === 'Y'),
-      //       ['sortOrd'],
-      //       ['asc'],
-      //    )
-      // } else {
-      //    return []
-      // }
+      if (codes && codes.length > 0) {
+         // useYn == 'Y', sortOrd 로 정렬
+         return _orderBy(
+            codes.filter((code) => code.useYn === 'Y' && code.pstgYn === 'Y'),
+            ['sortOrd'],
+            ['asc'],
+         )
+      } else {
+         return []
+      }
+   },
 
-      return [
-         { sclsfCd: 'A0001', sclsfNm: '코드 1' },
-         { sclsfCd: 'A0002', sclsfNm: '코드 2' },
-         { sclsfCd: 'A0003', sclsfNm: '코드 3' },
-         { sclsfCd: 'A0004', sclsfNm: '코드 4' },
-         { sclsfCd: 'A0005', sclsfNm: '코드 5' },
-      ]
+   /** 공통코드 조회 (exceptionCode :일정코드 제외) */
+   getConvertCodes(group, exceptionCode) {
+      let codes = this.getCodes(group)
+      if (exceptionCode !== '') codes = codes.filter((code) => code.sclsfCd !== exceptionCode)
+      codes = this.convertObjectKey(codes, { label: 'sclsfNm', value: 'sclsfCd' })
+
+      return codes
    },
 
    /** 첫글자 대문자 변환 */

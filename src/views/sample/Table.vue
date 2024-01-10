@@ -49,7 +49,8 @@ const { totalCount, rows, paginationInfo, loading, onPageChange, getDatas, onDet
 
 const columns = [
    { name: 'row-number', align: 'center', label: 'No.', headerStyle: 'width: 2%' },
-   { name: 'pntSeCd', align: 'center', label: '구분', field: 'pntSeCd', type: 'code' },
+   { name: 'pntSeCd', align: 'center', label: '구분', field: 'pntSeCd' },
+   { name: 'pntKndCd', align: 'center', label: '종류', field: 'pntKndCd', type: 'code' },
    { name: 'pntPlcyNm', align: 'center', label: '정책명', field: 'pntPlcyNm' },
    { name: 'saveExhsPnt', align: 'center', label: '포인트', field: 'saveExhsPnt', type: 'number' },
    {

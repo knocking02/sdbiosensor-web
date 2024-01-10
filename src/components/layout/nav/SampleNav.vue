@@ -22,15 +22,19 @@
                   <q-item-label>Quasar Editor </q-item-label>
                </q-item-section>
             </q-item>
+            <q-item clickable v-ripple>
+               <q-item-section>
+                  <q-item-label>Form </q-item-label>
+               </q-item-section>
+            </q-item>
             <q-item clickable v-ripple to="/sample/form">
                <q-item-section>
-                  <q-list>
-                     <q-item>
-                        <q-item-section>
-                           <q-item-label>Form </q-item-label>
-                        </q-item-section>
-                     </q-item>
-                  </q-list>
+                  <q-item-label style="padding-left: 10px"> - validatiion </q-item-label>
+               </q-item-section>
+            </q-item>
+            <q-item clickable v-ripple to="/sample/form-component">
+               <q-item-section>
+                  <q-item-label style="padding-left: 10px"> - radio & checkbox & select </q-item-label>
                </q-item-section>
             </q-item>
             <q-item clickable v-ripple to="/sample/calendar">
