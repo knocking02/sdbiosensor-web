@@ -24,7 +24,13 @@
             </q-item>
             <q-item clickable v-ripple to="/sample/form">
                <q-item-section>
-                  <q-item-label>Form </q-item-label>
+                  <q-list>
+                     <q-item>
+                        <q-item-section>
+                           <q-item-label>Form </q-item-label>
+                        </q-item-section>
+                     </q-item>
+                  </q-list>
                </q-item-section>
             </q-item>
             <q-item clickable v-ripple to="/sample/calendar">

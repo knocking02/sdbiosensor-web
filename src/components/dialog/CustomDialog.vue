@@ -1,8 +1,8 @@
 <template>
    <q-dialog ref="dialogRef" @hide="onDialogHide" :position="pos">
-      <q-card class="popUp_Layer pop_small" :class="type">
-         <q-card-section class="pop_header">
-            <h3 class="pop_tit">{{ $t('label.' + type) }}</h3>
+      <q-card style="width: 500px">
+         <q-card-section :class="headerVariant">
+            <div class="text-h6">{{ $t('label.' + type) }}</div>
          </q-card-section>
 
          <q-card-section class="pop_content">

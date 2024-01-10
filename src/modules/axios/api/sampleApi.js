@@ -2,8 +2,8 @@ import axios from '../axios'
 import { constant } from '@/modules/utils/constant'
 
 const sample = {
-   getMemberList() {
-      return axios.get('/json/member/member.json')
+   getPointList() {
+      return axios.get('/json/point.json')
    },
 
    getTableDatas() {
