@@ -2,17 +2,6 @@
    <q-page padding>
       <div class="q-pa-md" style="max-width: 400px">
          <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
-            동영상 업로더(아래)
-            <video-uploader />
-            <br />
-            이미지 업로더(아래)
-            <image-uploader />
-            <br />
-            파일 업로더(아래)
-            <file-uploader @update-file="getValue" />
-            <chip color="teal" text-color="pink" icon="cookie" name="test" @delete-value="deleteChip"></chip>
-
-            <excel-btn url="/ddd/ddd/ddd" />
             <v-select :options="option" label="사업정보" @update-value="getValue" ref="selectRef" />
             <q-input
                filled
@@ -51,12 +40,6 @@
 import { useQuasar } from 'quasar'
 import { getCurrentInstance, ref } from 'vue'
 import VSelect from '@/components/form/Select.vue'
-
-import ExcelBtn from '@/components/form/ExcelBtn.vue'
-import Chip from '@/components/form/Chip.vue'
-import FileUploader from '@/components/form/FileUploader.vue'
-import ImageUploader from '@/components/form/ImageUploader.vue'
-import videoUploader from '@/components/form/VideoUploader.vue'
 
 const { proxy } = getCurrentInstance()
 const $q = useQuasar()
@@ -157,10 +140,6 @@ const onReset = () => {
    email.value = null
    mobile.value = null
    selectRef.value.clear()
-}
-
-const deleteChip = (name) => {
-   alert(`delete ${name}`)
 }
 </script>
 

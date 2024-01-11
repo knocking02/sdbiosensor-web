@@ -1,5 +1,6 @@
 <template>
    <q-page padding>
+      <h6>Quasar Date Picker</h6>
       <div class="q-pa-md" style="max-width: 300px">
          <q-input filled v-model="calendarDate1">
             <template v-slot:append>
@@ -43,7 +44,6 @@
             </template>
          </q-input>
       </div>
-
       <div class="q-pa-md">
          <DateRangePicker rangeType="date" :range="1"></DateRangePicker>
       </div>
@@ -67,6 +67,16 @@
       <div class="q-pa-md">
          <q-date v-model="calendarDate3" range></q-date>
       </div>
+
+      <h6>Vue Datepicker</h6>
+      <div class="q-pa-md">
+         <date-picker @update-value="getValue($event)" placeholder="날짜를 선택해주세요" :min-date="new Date()" />
+      </div>
+
+      <div class="q-pa-md">
+         <VDateRangePicker required @update-value="getValue($event)" :isCenter="false"></VDateRangePicker>
+      </div>
+
       <div class="q-pa-md">
          <el-date-range-picker
             start-placeholder="시작 날짜"
@@ -85,10 +95,7 @@
          />
       </div> -->
 
-      <div class="q-pa-md">
-         <date-picker @update-value="getValue" placeholder="날짜를 선택해주세요." />
-      </div>
-      <scroll-picker :options="options" placeholder="당신의 몸무게는?" @update-value="updateValue" />
+      <div class="q-pa-md"></div>
    </q-page>
 </template>
 
@@ -97,7 +104,7 @@ import { ref } from 'vue'
 import { date } from 'quasar'
 import DateRangePicker from '@/components/form/DateRangePicker.vue'
 import DatePicker from '@/components/form/DatePicker.vue'
-
+import VDateRangePicker from '@/components/form/VDateRangePicker.vue'
 import ElDateRangePicker from '@/components/form/ElDateRangePicker.vue'
 
 const timestamp = Date.now()

@@ -57,16 +57,6 @@
                   <q-item-label>{{ $t('menu.language') }}</q-item-label>
                </q-item-section>
             </q-item>
-            <q-item clickable v-ripple to="/sample/axios">
-               <q-item-section>
-                  <q-item-label>AXIOS</q-item-label>
-               </q-item-section>
-            </q-item>
-            <q-item clickable v-ripple to="/sample/util">
-               <q-item-section>
-                  <q-item-label>UTIL</q-item-label>
-               </q-item-section>
-            </q-item>
          </q-list>
       </div>
    </q-drawer>
